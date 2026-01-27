@@ -1,0 +1,25 @@
+meta {
+  name: UPDATE Product
+  type: http
+  seq: 2
+}
+
+put {
+  url: https://golangexamplecrudapi-production.up.railway.app/api/products/1
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "name": "Produk_1_update",
+    "price": 90000,
+    "stock": 50
+  }
+  
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}
