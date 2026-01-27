@@ -1,0 +1,25 @@
+meta {
+  name: POST Product
+  type: http
+  seq: 1
+}
+
+post {
+  url: https://golangexamplecrudapi-production.up.railway.app/api/products
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "name": "Produk_3",
+    "price": 150000,
+    "stock": 1500
+  }
+  
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}
