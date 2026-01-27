@@ -1,4 +1,4 @@
-# Golang CRUD API – Categories  
+# Golang CRUD API – Kasir API  
 ### Bootcamp Golang with Mas Umam
 
 RESTful CRUD API sederhana menggunakan **Golang**, **Gin**, **GORM**, dan **PostgreSQL**, dengan arsitektur **Idiomatic Go (feature-based / clean architecture)**.  
@@ -46,5 +46,29 @@ Base URL: https://golangexamplecrudapi-production.up.railway.app
 ### Delete Category by ID
 **DELETE**
 /api/categories/{id}
+
+---
+
+## API Endpoints — Products
+
+### Get All Products
+**GET**
+/api/products
+
+### Get Product by ID
+**GET**
+/api/products/{id}
+
+### Create Product
+**POST**
+/api/products
+
+### Update Product by ID
+**PUT**
+/api/products/{id}
+
+### Delete Product by ID
+**DELETE**
+/api/products/{id}
 
 
