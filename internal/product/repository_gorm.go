@@ -23,7 +23,7 @@ func (r *gormRepository) FindByID(id uint) (*Product, error) {
 
 func (r *gormRepository) FindAll() ([]*Product, error) {
 	var products []*Product
-	err := r.db.Find(&products).Error
+	err := r.db.Preload("Category").Find(&products).Error
 	return products, err
 }
 
