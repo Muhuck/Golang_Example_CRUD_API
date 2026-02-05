@@ -12,8 +12,8 @@ func (s *Service) Create(c *Product) error {
 	return s.repo.Create(c)
 }
 
-func (s *Service) GetAll() ([]*Product, error) {
-	return s.repo.FindAll()
+func (s *Service) GetAll(filter ProductFilter) ([]*Product, error) {
+	return s.repo.FindAll(filter)
 }
 
 func (s *Service) GetByID(id uint) (*Product, error) {

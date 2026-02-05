@@ -39,8 +39,17 @@ func (h *Handler) create(c *gin.Context) {
 }
 
 func (h *Handler) getAll(c *gin.Context) {
-	categories, _ := h.service.GetAll()
-	c.JSON(http.StatusOK, categories)
+	name := c.Query("name")
+	filter := ProductFilter{
+		Name: name,
+	}
+
+	products, err := h.service.GetAll(filter)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	}
+	c.JSON(http.StatusOK, products)
 }
 
 func (h *Handler) getByID(c *gin.Context) {
