@@ -15,3 +15,7 @@ type Product struct {
 	UpdatedAt  time.Time         `json:"updated_at"`
 	Category   category.Category `json:"category" gorm:"foreignKey:CategoryID"`
 }
+
+type ProductFilter struct {
+	Name string
+}
