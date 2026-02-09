@@ -26,7 +26,7 @@ func (r *gormRepository) FindAll(filter ProductFilter) ([]*Product, error) {
 	query := r.db.Preload("Category")
 
 	if filter.Name != "" {
-		query = query.Where("name LIKE ?", "%"+filter.Name+"%")
+		query = query.Where("name ILIKE ?", "%"+filter.Name+"%")
 	}
 
 	err := query.Find(&products).Error

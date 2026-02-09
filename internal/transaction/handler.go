@@ -16,41 +16,42 @@ func NewHandler(service *Service) *Handler {
 }
 
 func (h *Handler) Register(r *gin.RouterGroup) {
-	r.POST("", h.create)
-	r.GET("", h.getAll)
+	r.POST("/", h.checkout)
+	r.GET("/", h.getAll)
 	r.GET("/:id", h.getByID)
 	r.PUT("/:id", h.update)
 	r.DELETE("/:id", h.delete)
 }
 
-func (h *Handler) create(c *gin.Context) {
-	var req Transaction
+func (h *Handler) checkout(c *gin.Context) {
+	var req CheckoutRequest
 	if err := c.ShouldBindJSON(&req); err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid request body"})
 		return
 	}
 
-	if err := h.service.Create(&req); err != nil {
+	transaction, err := h.service.Checkout(req.Items)
+	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
 	}
 
-	c.JSON(http.StatusCreated, req)
+	c.JSON(http.StatusOK, transaction)
 }
 
 func (h *Handler) getAll(c *gin.Context) {
-	categories, _ := h.service.GetAll()
-	c.JSON(http.StatusOK, categories)
+	transactions, _ := h.service.GetAll()
+	c.JSON(http.StatusOK, transactions)
 }
 
 func (h *Handler) getByID(c *gin.Context) {
 	id, _ := strconv.Atoi(c.Param("id"))
-	category, err := h.service.GetByID(uint(id))
+	transaction, err := h.service.GetByID(uint(id))
 	if err != nil {
 		c.JSON(http.StatusNotFound, gin.H{"error": "Transaction not found"})
 		return
 	}
-	c.JSON(http.StatusOK, category)
+	c.JSON(http.StatusOK, transaction)
 }
 
 func (h *Handler) update(c *gin.Context) {
