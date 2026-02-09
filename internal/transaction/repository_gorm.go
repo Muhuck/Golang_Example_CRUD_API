@@ -16,14 +16,14 @@ func (r *gormRepository) Create(c *Transaction) error {
 
 func (r *gormRepository) FindByID(id uint) (*Transaction, error) {
 	var transaction Transaction
-	err := r.db.First(&transaction, id).Error
+	err := r.db.Preload("Details").First(&transaction, id).Error
 	return &transaction, err
 
 }
 
 func (r *gormRepository) FindAll() ([]*Transaction, error) {
 	var transactions []*Transaction
-	err := r.db.Preload("Transaction").Find(&transactions).Error
+	err := r.db.Preload("Details").Find(&transactions).Error
 	return transactions, err
 }
 

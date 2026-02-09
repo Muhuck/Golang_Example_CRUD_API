@@ -17,5 +17,5 @@ type Product struct {
 }
 
 type ProductFilter struct {
-	Name string
+	Name string `json:"name"`
 }

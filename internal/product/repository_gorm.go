@@ -23,10 +23,10 @@ func (r *gormRepository) FindByID(id uint) (*Product, error) {
 
 func (r *gormRepository) FindAll(filter ProductFilter) ([]*Product, error) {
 	var products []*Product
-	query := r.db.Preload("Product")
+	query := r.db.Preload("Category")
 
 	if filter.Name != "" {
-		query = query.Where("name LIKE ?", "%"+filter.Name+"%")
+		query = query.Where("name ILIKE ?", "%"+filter.Name+"%")
 	}
 
 	err := query.Find(&products).Error
